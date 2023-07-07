@@ -1,9 +1,10 @@
 import fs from 'node:fs/promises'
 import express from 'express'
+import env from './sample-env.json'
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
-const port = process.env.PORT || 9090
+const port = process.env.PORT || env.app_port
 const base = process.env.BASE || '/'
 
 // Cached production assets

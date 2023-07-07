@@ -2,7 +2,6 @@ import { Link, useLocation } from 'react-router-dom'
 import SEOConfiguration from '../config-meta'
 import { useEffect, useState } from 'react';
 import { countingValue } from '../store/countingValue'
-import { getDataMeta } from '../components/data/MetaConfiguration'
 
 export default function Home() {
   const isLocation = useLocation();
@@ -10,25 +9,12 @@ export default function Home() {
   const increment = countingValue((state) => state.increment);
   const decrement = countingValue((state) => state.decrement);
   const incrementByAmount = countingValue((state) => state.incrementByAmount)
-  const [isMeta, setIsMeta] = useState(null)
 
-  useEffect(() => {
-    const defineMeta = async () => {
-      await getDataMeta({
-        path: '/home'
-      }).then(({ result, status }) => {
-        if (!status) return;
-
-        setIsMeta(result)
-      })
-    }
-
-    defineMeta()
-  }, [isLocation])
+  useEffect(() => { }, [isLocation])
 
   return (
     <div>
-      <SEOConfiguration data={isMeta} />
+      <SEOConfiguration path="/home" />
       <div className="flex flex-col justify-center items-center">
         <img src="/avataaars.png" className="h-40 w-40" />
         <h1 className="text-7xl">Home</h1>
