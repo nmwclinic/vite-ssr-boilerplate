@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import config from "/sample-env.json"
 import { useLocation } from "react-router-dom";
-import { getDataMeta } from "./components/data/MetaConfiguration";
 
 export default function SEOConfiguration({ path }) {
   const isLocation = useLocation();
@@ -15,11 +14,16 @@ export default function SEOConfiguration({ path }) {
 
   useEffect(() => {
     async function APIMetaConfiguration() {
-      await getDataMeta({ path: path }).then(({ result, status }) => {
-        if (!status) return;
+      try {
+        const response = await fetch(`https://api-sandbox.nmw.clinic/seo?path=${path}`)
+        const data = await response.json();
+        if (!data.status) return;
 
-        setIsMeta(result)
-      })
+        setIsMeta(data.result)
+      } catch (error) {
+
+        return error
+      }
     }
 
     APIMetaConfiguration()

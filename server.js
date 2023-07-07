@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises'
 import express from 'express'
-import env from './sample-env.json'
+import env from './sample-env.json' assert { type: 'json' };
 
 // Constants
 const isProduction = process.env.NODE_ENV === 'production'
