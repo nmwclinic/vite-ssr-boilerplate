@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "node server",
     "build": "npm run build:client && npm run build:server",
-    "generate": "vite build --outDir dist/static && npm run build:server && node prerender",
     "build:client": "vite build --ssrManifest --outDir dist/client",
     "build:server": "vite build --ssr src/entry-server.jsx --outDir dist/server",
     "preview": "cross-env NODE_ENV=production node server"
@@ -29,6 +28,7 @@
     "react-router-dom": "^6.13.0",
     "redux": "^4.2.1",
     "sirv": "^2.0.3",
+    "vite-plugin-sitemap": "^0.4.2",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
