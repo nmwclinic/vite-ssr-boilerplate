@@ -4,8 +4,6 @@ import App from './App'
 import { StaticRouter } from "react-router-dom/server";
 import './index.css';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import SEOConfiguration from './config-meta';
-import Router from './router';
 import axios from 'axios';
 
 export async function render(url) {
@@ -16,21 +14,21 @@ export async function render(url) {
 
   const html = ReactDOMServer.renderToString(
     <React.StrictMode>
-      <StaticRouter location={currentURL}>
+      <StaticRouter location={url}>
         <HelmetProvider context={helmetContext}>
           <Helmet>
             <title>{data.result.title ?? 'Official NMW Clinic'}</title>
             <meta name="title" content={data.result.title} />
             <meta name="description" content={data.result.description} />
+            <meta name="twitter:title" content={data.result.title} />
+            <meta name="twitter:description" content={data.result.description} />
+            <meta name="twitter:image" content={data.result.image} />
             <meta property="og:title" content={data.result.title} />
             <meta property="og:description" content={data.result.description} />
             <meta property="og:image" content={data.result.image} />
             <meta property="og:image:alt" content={data.result.description} />
             <meta property="og:url" content={data.result.url} />
             <meta property="og:type" content="website" />
-            <meta name="twitter:title" content={data.result.title} />
-            <meta name="twitter:description" content={data.result.description} />
-            <meta name="twitter:image" content={data.result.image} />
           </Helmet>
           <App />
         </HelmetProvider>
@@ -38,8 +36,7 @@ export async function render(url) {
     </React.StrictMode>
   )
 
-  // console.log(data)
-  // console.log(currentURL)
+  console.log(data)
 
   const { helmet } = helmetContext;
 

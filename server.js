@@ -67,7 +67,6 @@ app.use('*', async (req, res) => {
     // Get Helmet Configuration
     const helmet = rendered.helmet
     const helmetTags = helmet?.title.toString() + helmet?.meta.toString();
-    console.log(helmetTags)
 
     const html = template
       .replace(`<!--app-head-->`, helmetTags ?? '')

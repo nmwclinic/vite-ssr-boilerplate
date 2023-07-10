@@ -5,12 +5,7 @@ import { useLocation } from "react-router-dom";
 
 export default function SEOConfiguration({ path }) {
   const isLocation = useLocation();
-  const [isMeta, setIsMeta] = useState({
-    title: 'NMW Clinic Official',
-    description: 'Official NMW Clinic sejak 2007 Klinik Kecantikan, Klinik Aesthetic',
-    image: 'https://dummyimage.com/300.png/09f/fff',
-    url: config.app_url + path
-  })
+  const [isMeta, setIsMeta] = useState(null)
 
   useEffect(() => {
     async function APIMetaConfiguration() {
@@ -30,7 +25,7 @@ export default function SEOConfiguration({ path }) {
     APIMetaConfiguration()
   }, [path, isLocation])
 
-  return (
+  return isMeta && (
     <Helmet>
       <title>{isMeta.title}</title>
       <meta name="title" content={isMeta.title} />
