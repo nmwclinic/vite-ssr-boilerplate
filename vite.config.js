@@ -11,9 +11,10 @@ export default defineConfig({
     react(),
     tailwindcss('./tailwind.config.js'),
     Sitemap({
-      dynamicRoutes: dynamicRoutes,
+      outDir: 'dist/client',
       hostname: 'https://beta.drnat.skin',
       exclude: '/client',
+      dynamicRoutes: dynamicRoutes,
       generateRobotsTxt: true,
       robots: [
         {
