@@ -13,7 +13,14 @@ export default defineConfig({
     Sitemap({
       dynamicRoutes: dynamicRoutes,
       hostname: 'https://beta.drnat.skin',
-      exclude: '/client'
+      exclude: '/client',
+      generateRobotsTxt: true,
+      robots: [
+        {
+          userAgent: '*',
+          allow: dynamicRoutes,
+        }
+      ]
     })
   ],
 })
