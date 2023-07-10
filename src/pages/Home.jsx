@@ -10,11 +10,12 @@ export default function Home() {
   const decrement = countingValue((state) => state.decrement);
   const incrementByAmount = countingValue((state) => state.incrementByAmount)
 
-  useEffect(() => { }, [isLocation])
+  useEffect(() => {
+  }, [isLocation])
 
   return (
     <div>
-      <SEOConfiguration path="/home" />
+      <SEOConfiguration path="/products" />
       <div className="flex flex-col justify-center items-center">
         <img src="/avataaars.png" className="h-40 w-40" />
         <h1 className="text-7xl">Home</h1>

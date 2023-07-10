@@ -1,8 +1,8 @@
 import fs from 'node:fs/promises'
 import express from 'express'
-import env from './sample-env.json' assert { type: 'json' };
 
 // Constants
+const env = JSON.parse(await fs.readFile('sample-env.json', 'utf-8'));
 const isProduction = process.env.NODE_ENV === 'production'
 const port = process.env.PORT || env.app_port
 const base = process.env.BASE || '/'
@@ -22,8 +22,17 @@ const app = express()
 let vite
 if (!isProduction) {
   const { createServer } = await import('vite')
+
   vite = await createServer({
-    server: { middlewareMode: true },
+    server: {
+      middlewareMode: true,
+      watch: {
+        // During tests we edit the files too fast and sometimes chokidar
+        // misses change events, so enforce polling for consistency
+        usePolling: true,
+        interval: 100,
+      },
+    },
     appType: 'custom',
     base
   })
@@ -31,6 +40,7 @@ if (!isProduction) {
 } else {
   const compression = (await import('compression')).default
   const sirv = (await import('sirv')).default
+
   app.use(compression())
   app.use(base, sirv('./dist/client', { extensions: [] }))
 }
@@ -57,6 +67,7 @@ app.use('*', async (req, res) => {
     // Get Helmet Configuration
     const helmet = rendered.helmet
     const helmetTags = helmet?.title.toString() + helmet?.meta.toString();
+    console.log(helmetTags)
 
     const html = template
       .replace(`<!--app-head-->`, helmetTags ?? '')

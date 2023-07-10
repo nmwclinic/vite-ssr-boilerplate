@@ -17,11 +17,12 @@ export default function SEOConfiguration({ path }) {
       try {
         const response = await fetch(`https://api-sandbox.nmw.clinic/seo?path=${path}`)
         const data = await response.json();
+
         if (!data.status) return;
 
         setIsMeta(data.result)
       } catch (error) {
-
+        console.log(error)
         return error
       }
     }

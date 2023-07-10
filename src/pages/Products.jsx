@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import SEOConfiguration from '../config-meta'
 import { arrayStore } from '../store/updateArray'
 
+
 export default function Products() {
   const isLocation = useLocation();
   const { array } = arrayStore((state) => state.initial);
   const isUpdated = arrayStore((state) => state.updateArray);
+  // const [isMeta, setIsMeta] = useState(null)
   const handleUpdateArray = () => {
     isUpdated(['berhasil', 'tambah', 'new array'])
   }
