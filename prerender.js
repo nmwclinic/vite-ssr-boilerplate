@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const toAbsolute = (p) => path.resolve(__dirname, p)
 
-const template = fs.readFileSync(toAbsolute('dist/static/index.html'), 'utf-8')
+const template = fs.readFileSync(toAbsolute('dist/client/index.html'), 'utf-8')
 const { render } = await import('./dist/server/entry-server.js')
 
 // determine routes to pre-render from src/pages
@@ -23,13 +23,14 @@ const routesToPrerender = fs
 
     for (const url of routesToPrerender) {
       const context = {}
+      // const response = await fetch(`https://api-sandbox.nmw.clinic/seo?path=${url}`)
+      // const data = response;
+
       const rendered = await render(url, context)
 
       // Get Helmet Configuration
       const helmet = rendered.helmet
       const helmetTags = helmet?.title.toString() + helmet?.meta.toString();
-
-      console.log(helmetTags)
 
       const html = template
         .replace(`<!--app-head-->`, helmetTags ?? '')

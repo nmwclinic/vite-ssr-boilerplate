@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div>
-      <SEOConfiguration path="/products" />
+      <SEOConfiguration path="/" />
       <div className="flex flex-col justify-center items-center">
         <img src="/avataaars.png" className="h-40 w-40" />
         <h1 className="text-7xl">Home</h1>

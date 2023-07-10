@@ -62,15 +62,17 @@ app.use('*', async (req, res) => {
       render = (await import('./dist/server/entry-server.js')).render
     }
 
-    const rendered = await render(url, ssrManifest)
+    const context = {}
+    const rendered = await render(url, context)
 
     // Get Helmet Configuration
-    const helmet = rendered.helmet
-    const helmetTags = helmet?.title.toString() + helmet?.meta.toString();
 
     const html = template
-      .replace(`<!--app-head-->`, helmetTags ?? '')
-      .replace(`<!--app-html-->`, rendered.html ?? '')
+      .replace(`<!--app-head-->`, rendered.helmetTags)
+      .replace(`<!--app-html-->`, rendered.html)
+    console.log(rendered.helmetTags)
+    console.log(html)
+    // console.log(html)
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
