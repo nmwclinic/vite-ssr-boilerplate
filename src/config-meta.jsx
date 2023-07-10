@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import config from "/sample-env.json"
 import { useLocation } from "react-router-dom";
 
 export default function SEOConfiguration({ path }) {

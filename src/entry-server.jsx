@@ -16,7 +16,7 @@ export async function render(url) {
     <StaticRouter location={currentURL}>
       <HelmetProvider context={helmetContext}>
         <Helmet>
-          <title>{data.result.title}</title>
+          <title>{data.result.title ?? 'Official NMW Clinic'}</title>
           <meta name="title" content={data.result.title} />
           <meta name="description" content={data.result.description} />
           <meta name="twitter:title" content={data.result.title} />
@@ -36,11 +36,6 @@ export async function render(url) {
 
   const { helmet } = helmetContext;
   const helmetTags = helmet?.title.toString() + helmet?.meta.toString();
-
-  console.log(data)
-  // console.log(html)
-  // console.log(helmetTags)
-  console.log(currentURL)
 
   return { html, helmetTags }
 }

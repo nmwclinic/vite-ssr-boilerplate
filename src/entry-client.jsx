@@ -6,8 +6,7 @@ import App from './App'
 import { HelmetProvider } from 'react-helmet-async'
 
 ReactDOM.hydrateRoot(document.getElementById('root'),
-  // <Router future={{ v7_startTransition: true }}>
-  <Router>
+  <Router future={{ v7_startTransition: true }}>
     <HelmetProvider>
       <App />
     </HelmetProvider>

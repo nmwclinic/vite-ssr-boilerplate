@@ -26,12 +26,12 @@ if (!isProduction) {
   vite = await createServer({
     server: {
       middlewareMode: true,
-      watch: {
-        // During tests we edit the files too fast and sometimes chokidar
-        // misses change events, so enforce polling for consistency
-        usePolling: true,
-        interval: 100,
-      },
+      // watch: {
+      //   // During tests we edit the files too fast and sometimes chokidar
+      //   // misses change events, so enforce polling for consistency
+      //   usePolling: true,
+      //   interval: 100,
+      // },
     },
     appType: 'custom',
     base
@@ -70,9 +70,6 @@ app.use('*', async (req, res) => {
     const html = template
       .replace(`<!--app-head-->`, rendered.helmetTags)
       .replace(`<!--app-html-->`, rendered.html)
-    console.log(rendered.helmetTags)
-    console.log(html)
-    // console.log(html)
 
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {

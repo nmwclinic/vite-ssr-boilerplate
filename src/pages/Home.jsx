@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom'
 import SEOConfiguration from '../config-meta'
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { countingValue } from '../store/countingValue'
 
 export default function Home() {
